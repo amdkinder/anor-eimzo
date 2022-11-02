@@ -54,7 +54,7 @@ export default class EIMZO {
     /**
      * @return {Promise<{major: Number, minor: Number}>}
      */
-    async checkVersion() {
+    static async checkVersion() {
         return new Promise((resolve, reject) => {
             client.checkVersion(
                 function (major, minor) {
@@ -67,7 +67,7 @@ export default class EIMZO {
         })
     }
 
-    async installApiKeys() {
+    static async installApiKeys() {
         return new Promise((resolve, reject) => {
             client.installApiKeys(resolve, reject)
         })
@@ -76,7 +76,7 @@ export default class EIMZO {
     /**
      * @return {Promise<Cert[]>}
      */
-    async listAllUserKeys() {
+    static async listAllUserKeys() {
         return new Promise((resolve, reject) => {
             client.listAllUserKeys(
                 function (cert, index) {
@@ -98,7 +98,7 @@ export default class EIMZO {
      * @param {Cert} cert
      * @return {Promise<LoadKeyResult>}
      */
-    async loadKey(cert) {
+    static async loadKey(cert) {
         return new Promise((resolve, reject) => {
             client.loadKey(
                 cert,
@@ -115,7 +115,7 @@ export default class EIMZO {
      * @param {string} loadKeyId
      * @return {Promise<string[]>}
      */
-    async getCertificateChain(loadKeyId) {
+    static async getCertificateChain(loadKeyId) {
         return new Promise((resolve, reject) => {
             CAPIWS.callFunction({
                 plugin: 'x509', name: 'get_certificate_chain', arguments: [loadKeyId]
@@ -133,7 +133,7 @@ export default class EIMZO {
      * @param {string} loadKeyId
      * @return {Promise<?string>}
      */
-    async getMainCertificate(loadKeyId) {
+    static async getMainCertificate(loadKeyId) {
         let result = await this.getCertificateChain(loadKeyId)
 
         if (Array.isArray(result) && result.length > 0) {
@@ -146,7 +146,7 @@ export default class EIMZO {
      * @param {string} cert
      * @return {Promise<void>}
      */
-    async getCertInfo(cert) {
+    static async getCertInfo(cert) {
         return new Promise((resolve, reject) => {
             CAPIWS.callFunction({name: 'get_certificate_info', arguments: [cert]},
                 (event, data) => {
@@ -164,7 +164,7 @@ export default class EIMZO {
      * @param {string} content
      * @return {Promise<SignPkcs7Result>}
      */
-    async signPkcs7(cert, content) {
+    static async signPkcs7(cert, content) {
         let loadKeyResult = await this.loadKey(cert)
 
         return new Promise((resolve, reject) => {
@@ -188,7 +188,7 @@ export default class EIMZO {
      * @param {?Function} timestamper - function to get timestamp data from server
      * @return {Promise<SignPkcs7Result>}
      */
-    async createPkcs7(id, content, timestamper) {
+    static async createPkcs7(id, content, timestamper) {
         return new Promise((resolve, reject) => {
             client.createPkcs7(id, content, timestamper,
                 (/* string */ pkcs7) => {
@@ -202,7 +202,7 @@ export default class EIMZO {
      *
      * @return {Promise<string>}
      */
-    async getTimestampToken(signature) {
+    static async getTimestampToken(signature) {
         return new Promise((resolve, reject) => {
             CAPIWS.callFunction({
                 name: 'get_timestamp_token_request_for_signature',
@@ -221,13 +221,13 @@ export default class EIMZO {
      * @param {string} domain
      * @param {string} key
      */
-    addApiKey(domain, key) {
+    static addApiKey(domain, key) {
         if (!this.apiKeys.includes(domain)) {
             this.apiKeys.push(domain, key)
         }
     }
 
-    async install() {
+    static async install() {
         await this.checkVersion()
 
         client.API_KEYS = this.apiKeys
