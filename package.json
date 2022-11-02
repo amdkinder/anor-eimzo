@@ -1,0 +1,26 @@
+{
+  "name": "anor-eimzo",
+  "version": "1.0.2",
+  "description": "Eimzo plugin for npm package",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && NODE_ENV=production babel src --out-dir dist --copy-files"
+  },
+  "keywords": [
+    "anor-eimzo"
+  ],
+  "author": "Akhrorbek Kuchkarov",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "react": "^18.2.0",
+    "react-select": "^5.5.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.19.3",
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.18.6"
+  }
+}
