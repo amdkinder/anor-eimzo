@@ -168,7 +168,7 @@ class EIMZO {
       CAPIWS.callFunction({
         name: 'create_pkcs7',
         plugin: 'pkcs7',
-        arguments: [window.Base64.encode(content), loadKeyResult.id, 'no']
+        arguments: [content, loadKeyResult.id, 'no']
       }, (event, data) => {
         if (data.success) {
           resolve(data);

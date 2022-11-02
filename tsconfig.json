@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "strict": false,
+    "jsx": "react",
+    "declaration": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "target": "es6",
+    "module": "es6",
+    "moduleResolution": "node"
+  },
+  "include": ["src"]
+}
