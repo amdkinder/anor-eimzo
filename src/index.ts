@@ -1,3 +1,3 @@
-import EimzoLib from "./eimzo/EimzoLib";
+import {EimzoClient} from "./eimzo/eimzo-client";
 
-export {EimzoLib}
+export {EimzoClient}
