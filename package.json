@@ -1,6 +1,6 @@
 {
   "name": "anor-eimzo",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Eimzo plugin for npm package",
   "main": "src/index.ts",
   "scripts": {
